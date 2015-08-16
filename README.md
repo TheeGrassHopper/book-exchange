@@ -1,1 +1,2 @@
-# book-exchange
+# Connect-Books
+Connect Books Together

@@ -4,11 +4,13 @@ class CreateBooks < ActiveRecord::Migration
       t.string :title
       t.integer :isbn
       t.string :author
-      t.string :professor
+      t.string :class
+      t.string :class_date
       t.integer :book_type
       t.integer :condition
       t.decimal :price
       t.text :description
+
 
       t.timestamps null: false
     end

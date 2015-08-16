@@ -1,44 +1,70 @@
-<p id="notice"><%= notice %></p>
+<div class="col-md-8 col-md-offset-2">
+	<div class="book-show">
+		<h2><%= @book.title %></h2>
+		<p class="book-posted-by">Posted by <%= @book.user.email %> <%= time_ago_in_words(@book.created_at) %>ago</p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @book.title %>
-</p>
+		<p class="book-desc">
+		  <strong>Title:</strong>
+		  <%= @book.title %>
+		</p>
+		<p ><%= @book.description %></p>
+		<p>
+		  <strong>Isbn:</strong>
+		  <%= @book.isbn %>
+		</p>
 
-<p>
-  <strong>Isbn:</strong>
-  <%= @book.isbn %>
-</p>
+		<p>
+		  <strong>Author:</strong>
+		  <%= @book.author %>
+		</p>
 
-<p>
-  <strong>Author:</strong>
-  <%= @book.author %>
-</p>
+		<p>
+		  <strong>Class:</strong>
+		  <%= @book.class %>
+		</p>
 
-<p>
-  <strong>Professor:</strong>
-  <%= @book.professor %>
-</p>
+		<p>
+		  <strong>Class Date:</strong>
+		  <%= @book.class_data%>
+		  </p>
 
-<p>
-  <strong>Book type:</strong>
-  <%= @book.book_type %>
-</p>
+		<p>
+		<strong>Book Type:</strong>
+		  <%= @book.book_type %>
+		</p>
 
-<p>
-  <strong>Condition:</strong>
-  <%= @book.condition %>
-</p>
+		<p>
+		  <strong>Condition:</strong>
+		  <%= @book.condition %>
+		</p>
 
-<p>
-  <strong>Price:</strong>
-  <%= @book.price %>
-</p>
+		<p>
+		  <strong>Price:</strong>
+		  <%= @book.price %>
+		</p>
+		<!-- renders the _comment.html.erb partial file. -->
+		<h3 class="comment-section-header">Comments:</h3>
+		<p><%= render @book.comments %></p>
+		<!-- when we want to show the comments on books by users -->
+		<h3 class="reply-to-msg">Reply to book:</h3>
+		<!-- renders the comments form -->
+		<%= render 'comments/form' %>
 
-<p>
-  <strong>Description:</strong>
-  <%= @book.description %>
-</p>
+		<!-- Add a conditional so that the 'edit' and 'destroy' links only appear for the user who created the book. -->
+		<div class="links btn-group">
+			<%= link_to "Back", root_path, class: "btn btn-default" %>
+			<% if user_signed_in? %>
+				<% if @book.user_id == current_user.id %>
+					<%= link_to "Edit", edit_book_path(@book), class: "btn btn-default" %>
+					<%= link_to "Delete", book_path(@book), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-default" %>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+</div>
 
-<%= link_to 'Edit', edit_book_path(@book) %> |
-<%= link_to 'Back', books_path %>
+
+
+
+		
+		
