@@ -1,14 +1,13 @@
 class User < ActiveRecord::Base
+	has_many :books
+	has_many :comments
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
 
-has_many :books
   TEMP_EMAIL_PREFIX = 'change@me'
   TEMP_EMAIL_REGEX = /\Achange@me/
-
-  # Include default devise modules. Others available are:
-  # :lockable, :timeoutable
-  devise :database_authenticatable, :registerable, :confirmable,
-    :recoverable, :rememberable, :trackable, :validatable, :omniauthable
-
   validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
 
   def self.find_for_oauth(auth, signed_in_resource = nil)
@@ -56,5 +55,5 @@ has_many :books
   def email_verified?
     self.email && self.email !~ TEMP_EMAIL_REGEX
   end
-end
 
+end

@@ -1,15 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Name</title>
+  <title>Books Connect</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
-<%= yield %>
+<div
+  class="fb-like"
+  data-share="true"
+  data-width="450"
+  data-show-faces="true">
+</div>
 
+	<div class="navbar navbar-default">
+		<div class="container">
+			<div class="navbar-header">
+				<%= link_to "Books Connect", root_path, class: "navbar-brand" %>
+			</div>
+				<ul class="nav navbar-nav">
+					<li><%= link_to "Sign Up", new_user_registration_path %></li>
+						<% if user_signed_in? %>
+					<li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li> 
+					<%else%>
+						<li ><%= link_to "Log In", new_user_session_path %></li>
+					<% end %>
+				</ul>
+				<% if user_signed_in? %>
+				<p><%= link_to "Post A Book", new_book_path, class: "navbar-right navbar-text navbar-link" %></p>
+				<% end %>
+			</div>
+		</div>
+		
+	<p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+	<div class="container">
+		<%= yield %>
+	</div>
 </body>
 </html>
+
