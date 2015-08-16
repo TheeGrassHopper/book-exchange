@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+  devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks' }
   resources :books
+  root 'books#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
+  match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
